@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ricetta - Ricettame</title>
+    <title>Ricette - Ricettame</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
-        /* Stili specifici per la pagina singola della ricetta */
+        /* Stili extra per i dettagli della ricetta */
         .recipe-header { margin-top: 40px; text-align: center; }
         .recipe-title { font-size: 2.5rem; color: #ff7f50; margin-bottom: 10px; }
         .recipe-meta { color: #666; font-size: 0.9rem; margin-bottom: 30px; }
         .recipe-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 40px; }
-        .recipe-layout { display: flex; gap: 40px; }
-        .ingredients-box { flex: 1; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content; }
-        .steps-box { flex: 2; }
+        .recipe-layout { display: flex; flex-wrap: wrap; gap: 40px; }
+        .ingredients-box { flex: 1; min-width: 250px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content; }
+        .steps-box { flex: 2; min-width: 300px; }
         .section-title { color: #333; border-bottom: 2px solid #ff7f50; padding-bottom: 10px; margin-bottom: 20px; }
         .ingredients-list { list-style-type: none; padding: 0; }
         .ingredients-list li { padding: 10px 0; border-bottom: 1px solid #eee; }
@@ -22,126 +22,174 @@
         .steps-list { padding-left: 20px; }
         .steps-list li { margin-bottom: 15px; line-height: 1.6; }
         .steps-list li::marker { color: #ff7f50; font-weight: bold; }
-        #error-message { display: none; text-align: center; color: red; margin-top: 50px; font-size: 1.5rem; }
+        .btn-back { display: inline-block; margin-bottom: 20px; color: #ff7f50; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+        .btn-back:hover { text-decoration: underline; }
     </style>
 </head>
 <body class="page-body">
 
     <header class="header page-header">
-        <a href="index.html" class="logo-container">
+        <a href="../index.html" class="logo-container">
+            <img src="../IMAGES/logo.png" alt="Ricettame Logo" class="logo-img" onerror="this.style.display='none'">
             <span style="font-size: 1.3rem;">Ricettame</span>
         </a>
         <nav class="nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="ricette/index.html">Ricette</a></li>
-                <li><a href="categorie/index.html">Categorie</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="ricette.html">Ricette</a></li>
+                <li><a href="../CATEGORIE/categorie.html">Categorie</a></li>
                 <li><a href="#">Contatti</a></li>
             </ul>
         </nav>
+        <a href="#" class="btn btn-shop">Accedi</a>
     </header>
 
-    <main class="main-content" id="recipe-container">
+    <main class="main-content" id="vista-lista">
+        <div class="search-filter-container">
+            <input type="text" class="search-bar" placeholder="Cerca una ricetta...">
+            <button class="filter-btn">⚙️ Filtri</button>
+        </div>
+
+        <div id="griglia-ricette">
+            <p style="text-align: center;">Caricamento ricette in corso...</p>
+        </div>
+    </main>
+
+    <div class="alphabet-area" id="sidebar-alfabeto">
+        <div class="alphabet-nav">
+            <a href="#letter-A">A</a>
+            <a href="#letter-S">S</a>
+            <a href="#letter-T">T</a>
+            <a href="#letter-Z">Z</a>
+        </div>
+    </div>
+
+
+    <main class="main-content" id="vista-dettaglio" style="display: none;">
+        <a href="ricette.html" class="btn-back">← Torna a tutte le ricette</a>
         
-        <div id="error-message">Oops! Ricetta non trovata. 😕</div>
+        <div class="recipe-header">
+            <h1 class="recipe-title" id="r-titolo">Titolo Ricetta</h1>
+            <p class="recipe-meta">
+                ⏱️ <span id="r-tempo"></span> | 
+                👨‍🍳 Difficoltà: <span id="r-difficolta"></span> | 
+                🍽️ Porzioni: <span id="r-porzioni"></span>
+            </p>
+        </div>
 
-        <div id="recipe-content" style="display: none;">
-            <div class="recipe-header">
-                <h1 class="recipe-title" id="r-titolo">Caricamento...</h1>
-                <p class="recipe-meta">
-                    ⏱️ <span id="r-tempo"></span> | 
-                    👨‍🍳 Difficoltà: <span id="r-difficolta"></span> | 
-                    🍽️ Porzioni: <span id="r-porzioni"></span>
-                </p>
+        <img id="r-immagine" src="" alt="Foto ricetta" class="recipe-image" onerror="this.style.display='none'">
+
+        <p id="r-descrizione" style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; text-align: center; color: #444;"></p>
+
+        <div class="recipe-layout">
+            <div class="ingredients-box">
+                <h3 class="section-title">Ingredienti</h3>
+                <ul class="ingredients-list" id="r-ingredienti"></ul>
             </div>
-
-            <img id="r-immagine" src="" alt="Foto ricetta" class="recipe-image">
-
-            <p id="r-descrizione" style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; text-align: center; color: #444;"></p>
-
-            <div class="recipe-layout">
-                <div class="ingredients-box">
-                    <h3 class="section-title">Ingredienti</h3>
-                    <ul class="ingredients-list" id="r-ingredienti">
-                        </ul>
-                </div>
-
-                <div class="steps-box">
-                    <h3 class="section-title">Procedimento</h3>
-                    <ol class="steps-list" id="r-procedimento">
-                        </ol>
-                </div>
+            <div class="steps-box">
+                <h3 class="section-title">Procedimento</h3>
+                <ol class="steps-list" id="r-procedimento"></ol>
             </div>
         </div>
     </main>
 
-    <script>
-        // 1. Prendi l'ID della ricetta dall'URL (es. ?id=carbonara)
-        const urlParams = new URLSearchParams(window.location.search);
-        const recipeId = urlParams.get('id');
 
-        // 2. Funzione per caricare i dati
-        async function caricaRicetta() {
+    <script>
+        async function inizializzaPagina() {
+            // Controlla se c'è un ID nell'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const recipeId = urlParams.get('id');
+
             try {
-                // Legge il file JSON
+                // Legge il file ricette.json (che si trova nella stessa cartella)
                 const response = await fetch('ricette.json');
                 const ricette = await response.json();
 
-                // Cerca la ricetta che ha l'ID uguale a quello nell'URL
-                const ricettaTrovata = ricette.find(r => r.id === recipeId);
-
-                if (ricettaTrovata) {
-                    // Se la trova, mostra il contenitore e riempie i campi
-                    document.getElementById('recipe-content').style.display = 'block';
+                if (recipeId) {
+                    // SE C'È UN ID -> Mostra i dettagli della singola ricetta
+                    document.getElementById('vista-lista').style.display = 'none';
+                    document.getElementById('sidebar-alfabeto').style.display = 'none';
+                    document.getElementById('vista-dettaglio').style.display = 'block';
                     
-                    document.getElementById('r-titolo').textContent = ricettaTrovata.titolo;
-                    document.getElementById('r-tempo').textContent = ricettaTrovata.tempo;
-                    document.getElementById('r-difficolta').textContent = ricettaTrovata.difficolta;
-                    document.getElementById('r-porzioni').textContent = ricettaTrovata.porzioni;
-                    document.getElementById('r-descrizione').textContent = ricettaTrovata.descrizione;
-                    
-                    // Imposta l'immagine (se esiste)
-                    const imgElement = document.getElementById('r-immagine');
-                    if(ricettaTrovata.immagine) {
-                        imgElement.src = ricettaTrovata.immagine;
-                    } else {
-                        imgElement.style.display = 'none'; // Nasconde se non c'è foto
-                    }
-
-                    // Ciclo per inserire gli ingredienti
-                    const listaIngredienti = document.getElementById('r-ingredienti');
-                    ricettaTrovata.ingredienti.forEach(ingrediente => {
-                        let li = document.createElement('li');
-                        li.textContent = ingrediente;
-                        listaIngredienti.appendChild(li);
-                    });
-
-                    // Ciclo per inserire il procedimento
-                    const listaProcedimento = document.getElementById('r-procedimento');
-                    ricettaTrovata.procedimento.forEach(passo => {
-                        let li = document.createElement('li');
-                        li.textContent = passo;
-                        listaProcedimento.appendChild(li);
-                    });
-
+                    mostraSingolaRicetta(ricette, recipeId);
                 } else {
-                    // Se non trova la ricetta (o ID sbagliato)
-                    document.getElementById('error-message').style.display = 'block';
+                    // SE NON C'È ID -> Mostra l'elenco di tutte le ricette
+                    document.getElementById('vista-lista').style.display = 'block';
+                    document.getElementById('sidebar-alfabeto').style.display = 'flex';
+                    document.getElementById('vista-dettaglio').style.display = 'none';
+                    
+                    mostraElencoRicette(ricette);
                 }
             } catch (error) {
                 console.error("Errore nel caricamento del JSON:", error);
-                document.getElementById('error-message').textContent = "Errore nel caricamento dei dati.";
-                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('griglia-ricette').innerHTML = "<p style='color:red; text-align:center;'>Impossibile caricare le ricette. Avvia con un server locale (Live Server).</p>";
             }
         }
 
-        // Fai partire la funzione se c'è un ID nell'URL
-        if (recipeId) {
-            caricaRicetta();
-        } else {
-            document.getElementById('error-message').style.display = 'block';
-            document.getElementById('error-message').textContent = "Nessuna ricetta selezionata.";
+        // Funzione che genera la griglia HTML
+        function mostraElencoRicette(ricette) {
+            const griglia = document.getElementById('griglia-ricette');
+            griglia.innerHTML = ""; // Pulisce il testo "Caricamento in corso..."
+
+            // Raggruppa le ricette per lettera
+            const ricettePerLettera = {};
+            ricette.forEach(r => {
+                if (!ricettePerLettera[r.lettera]) ricettePerLettera[r.lettera] = [];
+                ricettePerLettera[r.lettera].push(r);
+            });
+
+            // Genera l'HTML per ogni lettera e le sue ricette
+            for (const lettera of Object.keys(ricettePerLettera).sort()) {
+                let htmlBlocco = `
+                    <div class="letter-section">
+                        <h2 class="letter-title" id="letter-${lettera}">${lettera}</h2>
+                        <div class="cards-container">
+                `;
+                
+                ricettePerLettera[lettera].forEach(ricetta => {
+                    // Il link punta a se stesso, ma aggiungendo l'id!
+                    htmlBlocco += `
+                        <a href="ricette.html?id=${ricetta.id}" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="card">${ricetta.titolo}</div>
+                        </a>
+                    `;
+                });
+
+                htmlBlocco += `</div></div>`;
+                griglia.innerHTML += htmlBlocco;
+            }
         }
+
+        // Funzione che popola i dettagli della ricetta scelta
+        function mostraSingolaRicetta(ricette, idDaCercare) {
+            const ricetta = ricette.find(r => r.id === idDaCercare);
+            
+            if (ricetta) {
+                document.title = ricetta.titolo + " - Ricettame";
+                document.getElementById('r-titolo').textContent = ricetta.titolo;
+                document.getElementById('r-tempo').textContent = ricetta.tempo;
+                document.getElementById('r-difficolta').textContent = ricetta.difficolta;
+                document.getElementById('r-porzioni').textContent = ricetta.porzioni;
+                document.getElementById('r-descrizione').textContent = ricetta.descrizione;
+                
+                if(ricetta.immagine) document.getElementById('r-immagine').src = ricetta.immagine;
+
+                const listaIngredienti = document.getElementById('r-ingredienti');
+                ricetta.ingredienti.forEach(ing => {
+                    listaIngredienti.innerHTML += `<li>${ing}</li>`;
+                });
+
+                const listaProcedimento = document.getElementById('r-procedimento');
+                ricetta.procedimento.forEach(passo => {
+                    listaProcedimento.innerHTML += `<li>${passo}</li>`;
+                });
+            } else {
+                document.getElementById('vista-dettaglio').innerHTML = "<h2 style='text-align:center;'>Ricetta non trovata 😕</h2> <br> <a href='ricette.html' class='btn-back'>← Torna indietro</a>";
+            }
+        }
+
+        // Avvia tutto appena la pagina si apre
+        inizializzaPagina();
     </script>
 </body>
 </html>
