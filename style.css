@@ -26,7 +26,7 @@ body, html {
    SEZIONE HERO (MAIN PAGE)
    ========================================= */
 .hero {
-    background-image: url('image_2.png'); /* Sfondo della hero */
+    background-image: url('images/image_2.png'); /* Sfondo corretto con la cartella images */
     background-size: cover;
     background-position: center;
     height: 100vh;
