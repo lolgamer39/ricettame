@@ -196,3 +196,149 @@ body, html {
     font-weight: 400;
     text-shadow: 0 1px 5px rgba(0,0,0,0.3);
 }
+/* =========================================
+   STILI PAGINE INTERNE (RICETTE / CATEGORIE)
+   ========================================= */
+
+/* Sfondo chiaro per le pagine interne invece dell'immagine */
+.page-body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header delle pagine interne (rimane fissato in alto e non fluttuante) */
+.page-header {
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.page-header .nav ul li a {
+    color: #333; /* Testo scuro per l'header chiaro */
+}
+
+.page-header .nav ul li a:hover {
+    color: #ff7f50;
+}
+
+/* Contenitore principale */
+.main-content {
+    max-width: 1000px;
+    margin: 120px auto 50px auto; /* Spazio per l'header */
+    padding: 0 20px;
+}
+
+/* Barra di ricerca e filtro */
+.search-filter-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.search-bar {
+    flex-grow: 1;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 15px rgba(255, 127, 80, 0.3);
+    border-color: #ff7f50;
+}
+
+.filter-btn {
+    padding: 15px 30px;
+    border-radius: 30px;
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+/* Griglia e Lettere */
+.letter-title {
+    width: 100%;
+    border-bottom: 2px solid #ff7f50;
+    padding-bottom: 10px;
+    margin-top: 40px;
+    color: #ff7f50;
+    font-size: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   ALFABETO LATERALE A SCOMPARSA
+   ========================================= */
+.alphabet-area {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 60px; /* Area "sensibile" al passaggio del mouse */
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alphabet-nav {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 15px 10px;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+    
+    /* Gestione della scomparsa */
+    transform: translateX(100%); /* Nasconde il menu fuori dallo schermo */
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Quando il mouse entra nell'area sensibile, il menu compare */
+.alphabet-area:hover .alphabet-nav {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.alphabet-nav a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin: 3px 0;
+    text-align: center;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.alphabet-nav a:hover {
+    color: #ff7f50;
+    transform: scale(1.3);
+}
