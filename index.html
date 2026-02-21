@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricettame - Ricettario Personale</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap">
     <style>
         /* Reset di base */
         body, html {
@@ -12,11 +12,23 @@
             padding: 0;
             font-family: 'Montserrat', sans-serif;
             height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMAZIONI DI ENTRATA --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -30px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Contenitore principale */
         .hero {
-            background-image: url('image_2.png'); /* Inserisci il percorso corretto dell'immagine fornita */
+            background-image: url('image_2.png'); /* Assicurati che il nome sia corretto */
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -37,43 +49,41 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Overlay scuro come nell'immagine */
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
-        /* Contenuto Header */
+        /* Contenuto Header con animazione */
         .header {
             position: absolute;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%);
+            /* Il transform base è ora gestito dall'animazione */
             width: 90%;
             max-width: 1200px;
-            background: rgba(255, 255, 255, 0.1); /* Sfondo header semitrasparente */
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 2;
+            
+            /* Applica l'animazione */
+            animation: fadeInDown 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .logo {
             display: flex;
             align-items: center;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
         }
 
-        .logo img {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            object-fit: cover;
-        }
-
+        /* Navigazione interattiva */
         .nav ul {
             list-style: none;
             margin: 0;
@@ -89,58 +99,72 @@
             text-decoration: none;
             color: white;
             font-weight: 500;
-            transition: color 0.3s;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transizione fluida */
         }
 
+        /* Effetto hover sui link del menu: cambiano colore e si alzano leggermente */
         .nav ul li a:hover {
             color: #ff7f50;
+            transform: translateY(-3px);
+        }
+
+        /* STILE E ANIMAZIONI BOTTONI */
+        .btn {
+            background-color: #ff7f50;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Fondamentale per la fluidità */
+            border: 2px solid transparent;
         }
 
         .btn-shop {
-            background-color: #ff7f50; /* Colore arancione */
-            color: white;
             padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: background-color 0.3s;
-        }
-
-        .btn-shop:hover {
-            background-color: #e06e3e;
-        }
-
-        /* Contenuto Hero Centrale */
-        .hero-content {
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: capitalize;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
         }
 
         .btn-collection {
-            background-color: #ff7f50; /* Colore arancione */
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
+            padding: 18px 45px;
             font-size: 1.1rem;
-            transition: background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 127, 80, 0.3); /* Ombra di base */
         }
 
-        .btn-collection:hover {
+        /* Effetto quando passi sopra col mouse (Hover) */
+        .btn:hover {
             background-color: #e06e3e;
+            transform: scale(1.06); /* Allarga il bottone del 6% */
+            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.5); /* Aumenta l'ombra per l'effetto 3D */
+        }
+
+        /* Effetto quando clicchi col mouse (Active) */
+        .btn:active {
+            transform: scale(0.95); /* Stringe il bottone dando la sensazione del click fisico */
+            box-shadow: 0 2px 10px rgba(255, 127, 80, 0.3);
+        }
+
+        /* Contenuto Hero Centrale con animazione */
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            opacity: 0; /* Nasconde inizialmente per l'animazione */
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards; /* Parte con 0.3s di ritardo */
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -148,24 +172,24 @@
 
     <header class="header">
         <div class="logo">
-            <img src="image_2.png" alt="Ricettame Logo">
             <span>Ricettame</span>
         </div>
         <nav class="nav">
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Ricette</a></li>
+                <li><a href="#">Categorie</a></li>
                 <li><a href="#">Contatti</a></li>
             </ul>
         </nav>
-        <a href="#" class="btn-shop">Inizia a Cucinare</a>
+        <a href="#" class="btn btn-shop">Accedi</a>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Ricettame</h1>
-            <p class="hero-subtitle">Il tuo ricettario personale online per ogni occasione.</p>
-            <a href="#" class="btn-collection">Scopri le Ricette</a>
+            <p class="hero-subtitle">Il tuo ricettario personale online. Scopri, salva e crea piatti straordinari ogni giorno.</p>
+            <a href="#" class="btn btn-collection">Scopri le Ricette</a>
         </div>
     </section>
 
