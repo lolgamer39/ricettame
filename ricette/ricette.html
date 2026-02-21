@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricetta - Ricettame</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Stili specifici per la pagina singola della ricetta */
+        .recipe-header { margin-top: 40px; text-align: center; }
+        .recipe-title { font-size: 2.5rem; color: #ff7f50; margin-bottom: 10px; }
+        .recipe-meta { color: #666; font-size: 0.9rem; margin-bottom: 30px; }
+        .recipe-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        .recipe-layout { display: flex; gap: 40px; }
+        .ingredients-box { flex: 1; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content; }
+        .steps-box { flex: 2; }
+        .section-title { color: #333; border-bottom: 2px solid #ff7f50; padding-bottom: 10px; margin-bottom: 20px; }
+        .ingredients-list { list-style-type: none; padding: 0; }
+        .ingredients-list li { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .ingredients-list li::before { content: "• "; color: #ff7f50; font-weight: bold; }
+        .steps-list { padding-left: 20px; }
+        .steps-list li { margin-bottom: 15px; line-height: 1.6; }
+        .steps-list li::marker { color: #ff7f50; font-weight: bold; }
+        #error-message { display: none; text-align: center; color: red; margin-top: 50px; font-size: 1.5rem; }
+    </style>
+</head>
+<body class="page-body">
+
+    <header class="header page-header">
+        <a href="index.html" class="logo-container">
+            <span style="font-size: 1.3rem;">Ricettame</span>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ricette/index.html">Ricette</a></li>
+                <li><a href="categorie/index.html">Categorie</a></li>
+                <li><a href="#">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content" id="recipe-container">
+        
+        <div id="error-message">Oops! Ricetta non trovata. 😕</div>
+
+        <div id="recipe-content" style="display: none;">
+            <div class="recipe-header">
+                <h1 class="recipe-title" id="r-titolo">Caricamento...</h1>
+                <p class="recipe-meta">
+                    ⏱️ <span id="r-tempo"></span> | 
+                    👨‍🍳 Difficoltà: <span id="r-difficolta"></span> | 
+                    🍽️ Porzioni: <span id="r-porzioni"></span>
+                </p>
+            </div>
+
+            <img id="r-immagine" src="" alt="Foto ricetta" class="recipe-image">
+
+            <p id="r-descrizione" style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; text-align: center; color: #444;"></p>
+
+            <div class="recipe-layout">
+                <div class="ingredients-box">
+                    <h3 class="section-title">Ingredienti</h3>
+                    <ul class="ingredients-list" id="r-ingredienti">
+                        </ul>
+                </div>
+
+                <div class="steps-box">
+                    <h3 class="section-title">Procedimento</h3>
+                    <ol class="steps-list" id="r-procedimento">
+                        </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 1. Prendi l'ID della ricetta dall'URL (es. ?id=carbonara)
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+
+        // 2. Funzione per caricare i dati
+        async function caricaRicetta() {
+            try {
+                // Legge il file JSON
+                const response = await fetch('ricette.json');
+                const ricette = await response.json();
+
+                // Cerca la ricetta che ha l'ID uguale a quello nell'URL
+                const ricettaTrovata = ricette.find(r => r.id === recipeId);
+
+                if (ricettaTrovata) {
+                    // Se la trova, mostra il contenitore e riempie i campi
+                    document.getElementById('recipe-content').style.display = 'block';
+                    
+                    document.getElementById('r-titolo').textContent = ricettaTrovata.titolo;
+                    document.getElementById('r-tempo').textContent = ricettaTrovata.tempo;
+                    document.getElementById('r-difficolta').textContent = ricettaTrovata.difficolta;
+                    document.getElementById('r-porzioni').textContent = ricettaTrovata.porzioni;
+                    document.getElementById('r-descrizione').textContent = ricettaTrovata.descrizione;
+                    
+                    // Imposta l'immagine (se esiste)
+                    const imgElement = document.getElementById('r-immagine');
+                    if(ricettaTrovata.immagine) {
+                        imgElement.src = ricettaTrovata.immagine;
+                    } else {
+                        imgElement.style.display = 'none'; // Nasconde se non c'è foto
+                    }
+
+                    // Ciclo per inserire gli ingredienti
+                    const listaIngredienti = document.getElementById('r-ingredienti');
+                    ricettaTrovata.ingredienti.forEach(ingrediente => {
+                        let li = document.createElement('li');
+                        li.textContent = ingrediente;
+                        listaIngredienti.appendChild(li);
+                    });
+
+                    // Ciclo per inserire il procedimento
+                    const listaProcedimento = document.getElementById('r-procedimento');
+                    ricettaTrovata.procedimento.forEach(passo => {
+                        let li = document.createElement('li');
+                        li.textContent = passo;
+                        listaProcedimento.appendChild(li);
+                    });
+
+                } else {
+                    // Se non trova la ricetta (o ID sbagliato)
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            } catch (error) {
+                console.error("Errore nel caricamento del JSON:", error);
+                document.getElementById('error-message').textContent = "Errore nel caricamento dei dati.";
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+
+        // Fai partire la funzione se c'è un ID nell'URL
+        if (recipeId) {
+            caricaRicetta();
+        } else {
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('error-message').textContent = "Nessuna ricetta selezionata.";
+        }
+    </script>
+</body>
+</html>
