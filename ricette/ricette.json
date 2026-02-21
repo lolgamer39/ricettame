@@ -1,0 +1,53 @@
+[
+  {
+    "id": "spaghetti-carbonara",
+    "titolo": "Spaghetti alla Carbonara",
+    "categoria": "Primi Piatti",
+    "tempo": "20 min",
+    "difficolta": "Facile",
+    "porzioni": 4,
+    "immagine": "images/carbonara.jpg",
+    "descrizione": "Il classico piatto romano, cremoso e saporito, rigorosamente senza panna!",
+    "ingredienti": [
+      "320g di Spaghetti",
+      "150g di Guanciale",
+      "4 Tuorli d'uovo",
+      "50g di Pecorino Romano",
+      "Pepe nero in grani q.b."
+    ],
+    "procedimento": [
+      "Metti a bollire l'acqua per la pasta e salala (poco).",
+      "Taglia il guanciale a listarelle e rosolalo in una padella a fuoco dolce fino a renderlo croccante. Spegni il fuoco e tieni da parte.",
+      "In una ciotola capiente, sbatti i tuorli con il pecorino e abbondante pepe nero, fino a creare una crema pastosa.",
+      "Scola la pasta al dente (conservando un mestolo di acqua di cottura) e versala nella padella con il guanciale (fuoco spento!).",
+      "Aggiungi la crema di uova e pecorino, e un goccio d'acqua di cottura. Mescola energicamente per creare la cremina. Servi subito!"
+    ]
+  },
+  {
+    "id": "tiramisu",
+    "titolo": "Tiramisù Classico",
+    "categoria": "Dolci",
+    "tempo": "30 min",
+    "difficolta": "Media",
+    "porzioni": 6,
+    "immagine": "images/tiramisu.jpg",
+    "descrizione": "Il dolce al cucchiaio italiano per eccellenza, con savoiardi e crema al mascarpone.",
+    "ingredienti": [
+      "500g di Mascarpone",
+      "300g di Savoiardi",
+      "4 Uova freschissime",
+      "100g di Zucchero",
+      "Caffè moka (circa 300ml)",
+      "Cacao amaro in polvere"
+    ],
+    "procedimento": [
+      "Prepara il caffè e lascialo raffreddare in una ciotola larga.",
+      "Separa i tuorli dagli albumi. Monta i tuorli con lo zucchero fino ad avere un composto chiaro e spumoso.",
+      "Aggiungi il mascarpone ai tuorli montati e amalgama delicatamente.",
+      "Monta gli albumi a neve ben ferma e incorporali alla crema di mascarpone con movimenti dal basso verso l'alto.",
+      "Inzuppa rapidamente i savoiardi nel caffè e crea un primo strato in una pirofila.",
+      "Copri con metà della crema. Fai un altro strato di savoiardi e finisci con la crema rimanente.",
+      "Fai riposare in frigo per almeno 3 ore. Spolvera con cacao amaro prima di servire."
+    ]
+  }
+]
