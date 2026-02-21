@@ -3,77 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorie - Ricettame</title>
+    <title>Ricettame - Ricettario Personale</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-body">
+<body>
 
-    <header class="header page-header">
+    <header class="header">
+        
         <a href="index.html" class="logo-container">
+            <img src="IMAGES/logo.png" alt="Ricettame Logo" class="logo-img" onerror="this.style.display='none'">
             <span style="font-size: 1.3rem;">Ricettame</span>
         </a>
+        
         <nav class="nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Ricette</a></li>
-                <li><a href="#">Categorie</a></li>
+                
+                <li><a href="RICETTE/ricette.html">Ricette</a></li>
+                
+                <li><a href="CATEGORIE/categorie.html">Categorie</a></li>
+                
                 <li><a href="#">Contatti</a></li>
             </ul>
         </nav>
         <a href="#" class="btn btn-shop">Accedi</a>
     </header>
 
-    <main class="main-content">
-        
-        <div class="search-filter-container">
-            <input type="text" class="search-bar" placeholder="Cerca una categoria...">
-            <button class="filter-btn">⚙️ Filtri</button>
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <img src="IMAGES/title.png" alt="Ricettame" class="hero-title-img">
+            </h1>
+            <p class="hero-subtitle">Il tuo ricettario personale online. Scopri, salva e crea piatti straordinari ogni giorno.</p>
+            
+            <a href="RICETTE/ricette.html" class="btn btn-collection">Scopri le Ricette</a>
         </div>
-
-        <div class="letter-section">
-            <h2 class="letter-title" id="letter-A">A</h2>
-            <div class="cards-container">
-                <div class="card">Antipasti</div>
-                <div class="card">Arrosti</div>
-                <div class="card">Aperitivi</div>
-            </div>
-        </div>
-
-        <div class="letter-section">
-            <h2 class="letter-title" id="letter-D">D</h2>
-            <div class="cards-container">
-                <div class="card">Dolci al Cucchiaio</div>
-                <div class="card">Dolci da Forno</div>
-            </div>
-        </div>
-        
-        <div class="letter-section">
-            <h2 class="letter-title" id="letter-P">P</h2>
-            <div class="cards-container">
-                <div class="card">Primi Piatti</div>
-                <div class="card">Pesce</div>
-                <div class="card">Piatti Unici</div>
-                <div class="card">Pizze e Focacce</div>
-            </div>
-        </div>
-        
-    </main>
-
-    <div class="alphabet-area">
-        <div class="alphabet-nav">
-            <a href="#letter-A">A</a>
-            <a href="#letter-B">B</a>
-            <a href="#letter-C">C</a>
-            <a href="#letter-D">D</a>
-            <a href="#letter-E">E</a>
-            <a href="#letter-F">F</a>
-            <a href="#letter-G">G</a>
-            <a href="#letter-P">P</a>
-            <a href="#letter-Z">Z</a>
-        </div>
-    </div>
+    </section>
 
 </body>
 </html>
