@@ -28,7 +28,7 @@
 
         /* Contenitore principale */
         .hero {
-            background-image: url('image_2.png'); /* Assicurati che il nome sia corretto */
+            background-image: url('image_2.png'); /* Sfondo della hero */
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -58,7 +58,6 @@
             position: absolute;
             top: 20px;
             left: 50%;
-            /* Il transform base è ora gestito dall'animazione */
             width: 90%;
             max-width: 1200px;
             background: rgba(255, 255, 255, 0.15);
@@ -70,17 +69,19 @@
             justify-content: space-between;
             align-items: center;
             z-index: 2;
-            
-            /* Applica l'animazione */
             animation: fadeInDown 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
+        /* STILI PER L'IMMAGINE DEL LOGO NELL'HEADER */
         .logo {
             display: flex;
             align-items: center;
-            font-weight: 700;
-            font-size: 1.3rem;
-            letter-spacing: -0.5px;
+        }
+
+        .logo-img {
+            height: 35px; /* Modifica questo valore per ingrandire o rimpicciolire il logo in alto a sinistra */
+            width: auto;
+            display: block;
         }
 
         /* Navigazione interattiva */
@@ -100,10 +101,9 @@
             color: white;
             font-weight: 500;
             display: inline-block;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transizione fluida */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Effetto hover sui link del menu: cambiano colore e si alzano leggermente */
         .nav ul li a:hover {
             color: #ff7f50;
             transform: translateY(-3px);
@@ -117,7 +117,7 @@
             text-decoration: none;
             font-weight: 700;
             display: inline-block;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Fondamentale per la fluidità */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             border: 2px solid transparent;
         }
 
@@ -128,19 +128,17 @@
         .btn-collection {
             padding: 18px 45px;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(255, 127, 80, 0.3); /* Ombra di base */
+            box-shadow: 0 4px 15px rgba(255, 127, 80, 0.3);
         }
 
-        /* Effetto quando passi sopra col mouse (Hover) */
         .btn:hover {
             background-color: #e06e3e;
-            transform: scale(1.06); /* Allarga il bottone del 6% */
-            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.5); /* Aumenta l'ombra per l'effetto 3D */
+            transform: scale(1.06);
+            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.5);
         }
 
-        /* Effetto quando clicchi col mouse (Active) */
         .btn:active {
-            transform: scale(0.95); /* Stringe il bottone dando la sensazione del click fisico */
+            transform: scale(0.95);
             box-shadow: 0 2px 10px rgba(255, 127, 80, 0.3);
         }
 
@@ -148,16 +146,26 @@
         .hero-content {
             z-index: 2;
             max-width: 800px;
-            opacity: 0; /* Nasconde inizialmente per l'animazione */
-            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards; /* Parte con 0.3s di ritardo */
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* STILI PER L'IMMAGINE DEL TITOLO CENTRALE */
         .hero-title {
-            font-size: 4.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin: 0;
+            margin-bottom: 25px;
+        }
+
+        .hero-title-img {
+            max-width: 100%;
+            width: 500px; /* Modifica questo valore per ingrandire o rimpicciolire la scritta centrale */
+            height: auto;
+            /* Mantiene l'effetto ombra anche sull'immagine PNG per staccarla dallo sfondo */
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); 
+            display: block;
         }
 
         .hero-subtitle {
@@ -171,9 +179,9 @@
 <body>
 
     <header class="header">
-        <div class="logo">
-            <span>Ricettame</span>
-        </div>
+        <a href="#" class="logo">
+            <img src="images/title.png" alt="Ricettame Logo" class="logo-img">
+        </a>
         <nav class="nav">
             <ul>
                 <li><a href="#">Home</a></li>
@@ -187,7 +195,9 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Ricettame</h1>
+            <h1 class="hero-title">
+                <img src="images/title.png" alt="Ricettame" class="hero-title-img">
+            </h1>
             <p class="hero-subtitle">Il tuo ricettario personale online. Scopri, salva e crea piatti straordinari ogni giorno.</p>
             <a href="#" class="btn btn-collection">Scopri le Ricette</a>
         </div>
