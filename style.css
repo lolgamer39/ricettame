@@ -6,11 +6,11 @@ body, html {
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     height: 100%;
-    overflow-x: hidden; /* Evita lo scrolling orizzontale */
+    overflow-x: hidden;
 }
 
 /* =========================================
-   ANIMAZIONI (KEYFRAMES)
+   ANIMAZIONI
    ========================================= */
 @keyframes fadeInDown {
     from { opacity: 0; transform: translate(-50%, -30px); }
@@ -23,7 +23,7 @@ body, html {
 }
 
 /* =========================================
-   SEZIONE HERO (SFONDO PRINCIPALE)
+   SEZIONE HERO (MAIN PAGE)
    ========================================= */
 .hero {
     background-image: url('image_2.png'); /* Sfondo della hero */
@@ -39,7 +39,6 @@ body, html {
     position: relative;
 }
 
-/* Overlay scuro per far risaltare il testo */
 .hero::before {
     content: '';
     position: absolute;
@@ -52,7 +51,7 @@ body, html {
 }
 
 /* =========================================
-   HEADER E NAVIGAZIONE
+   HEADER CONDIVISO (PILLOLA)
    ========================================= */
 .header {
     position: absolute;
@@ -61,41 +60,40 @@ body, html {
     width: 90%;
     max-width: 1200px;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px); /* Effetto vetro/glassmorphism */
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
-    padding: 15px 30px;
+    padding: 10px 25px; /* Leggermente più snello */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
+    z-index: 10;
     animation: fadeInDown 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Animazione Header all'hover */
 .header:hover {
-    transform: translate(-50%, -5px) scale(1.03);
-    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -5px) scale(1.02);
+    background: rgba(255, 255, 255, 0.25);
 }
 
-/* Logo nell'Header */
 .logo-container {
     display: flex;
     align-items: center;
-    background-color: white;
-    padding: 5px;
-    border-radius: 12px;
+    background-color: transparent;
     text-decoration: none;
+    font-weight: 700;
+    color: white;
+    font-size: 1.2rem;
 }
 
 .logo-img {
     height: 35px;
     width: auto;
     display: block;
+    margin-right: 10px;
 }
 
-/* Menu di navigazione */
 .nav ul {
     list-style: none;
     margin: 0;
@@ -112,7 +110,7 @@ body, html {
     color: white;
     font-weight: 500;
     display: inline-block;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s;
 }
 
 .nav ul li a:hover {
@@ -121,7 +119,7 @@ body, html {
 }
 
 /* =========================================
-   PULSANTI (BOTTONI)
+   PULSANTI
    ========================================= */
 .btn {
     background-color: #ff7f50;
@@ -135,7 +133,7 @@ body, html {
 }
 
 .btn-shop {
-    padding: 12px 30px;
+    padding: 10px 25px;
 }
 
 .btn-collection {
@@ -152,11 +150,10 @@ body, html {
 
 .btn:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 10px rgba(255, 127, 80, 0.3);
 }
 
 /* =========================================
-   CONTENUTO CENTRALE (TITOLO E SOTTOTITOLO)
+   CONTENUTO HERO
    ========================================= */
 .hero-content {
     z-index: 2;
@@ -168,22 +165,16 @@ body, html {
     align-items: center;
 }
 
-.hero-title {
-    margin: 0;
-    margin-bottom: 25px;
-}
-
-/* Immagine Titolo Centrale */
 .hero-title-img {
     max-width: 100%;
     width: 500px;
     height: auto;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
     display: block;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    margin-bottom: 25px;
+    transition: all 0.4s; 
 }
 
-/* Animazione Zoom/3D del Titolo all'hover */
 .hero-title-img:hover {
     transform: scale(1.1) translateY(-5px); 
     filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); 
@@ -196,36 +187,38 @@ body, html {
     font-weight: 400;
     text-shadow: 0 1px 5px rgba(0,0,0,0.3);
 }
-/* =========================================
-   STILI PAGINE INTERNE (RICETTE / CATEGORIE)
-   ========================================= */
 
-/* Sfondo chiaro per le pagine interne invece dell'immagine */
+/* =========================================
+   STILI PAGINE INTERNE (CATEGORIE / RICETTE)
+   ========================================= */
 .page-body {
-    background-color: #f8f9fa;
+    background-color: #f4f4f4; /* Sfondo grigio chiarissimo */
     color: #333;
 }
 
-/* Header delle pagine interne (rimane fissato in alto e non fluttuante) */
+/* Header delle pagine interne a pillola grigia */
 .page-header {
-    background: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: relative; /* Non fluttua sopra il contenuto ma lo spinge giù */
+    top: 20px;
+    margin: 0 auto 60px auto; /* Centrato con margine sotto */
+    background: rgba(140, 140, 140, 0.85); /* Grigio elegante come nella tua foto */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-.page-header .nav ul li a {
-    color: #333; /* Testo scuro per l'header chiaro */
+.page-header:hover {
+    background: rgba(130, 130, 130, 0.95); /* Diventa leggermente più scuro al passaggio */
 }
 
-.page-header .nav ul li a:hover {
-    color: #ff7f50;
+.page-header .logo-container {
+    color: white; /* Assicura che la scritta Ricettame sia bianca */
 }
 
-/* Contenitore principale */
+/* Contenitore principale pagine interne */
 .main-content {
     max-width: 1000px;
-    margin: 120px auto 50px auto; /* Spazio per l'header */
+    margin: 0 auto 50px auto;
     padding: 0 20px;
+    animation: fadeInUp 0.8s forwards;
 }
 
 /* Barra di ricerca e filtro */
@@ -239,58 +232,74 @@ body, html {
     flex-grow: 1;
     padding: 15px 25px;
     border-radius: 30px;
-    border: 1px solid #ccc;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
     outline: none;
-    transition: box-shadow 0.3s;
+    transition: all 0.3s;
 }
 
 .search-bar:focus {
-    box-shadow: 0 0 15px rgba(255, 127, 80, 0.3);
-    border-color: #ff7f50;
+    box-shadow: 0 4px 20px rgba(255, 127, 80, 0.3);
 }
 
 .filter-btn {
     padding: 15px 30px;
     border-radius: 30px;
     background-color: white;
-    border: 1px solid #ccc;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     font-size: 1rem;
     cursor: pointer;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     transition: all 0.3s;
 }
 
 .filter-btn:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
+    background-color: #ff7f50;
+    color: white;
+    transform: translateY(-2px);
 }
 
-/* Griglia e Lettere */
+/* Griglia Categorie */
+.letter-section {
+    margin-bottom: 40px;
+}
+
 .letter-title {
     width: 100%;
     border-bottom: 2px solid #ff7f50;
     padding-bottom: 10px;
-    margin-top: 40px;
+    margin-bottom: 20px;
     color: #ff7f50;
     font-size: 2rem;
 }
 
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
 .card {
     background: white;
-    padding: 20px;
+    padding: 25px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    margin-bottom: 15px;
-    font-weight: 500;
+    font-weight: 600;
+    text-align: center;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s;
+    border: 1px solid transparent;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(255, 127, 80, 0.2);
+    border-color: #ff7f50;
+    color: #ff7f50;
 }
 
 /* =========================================
@@ -301,28 +310,26 @@ body, html {
     right: 0;
     top: 0;
     height: 100vh;
-    width: 60px; /* Area "sensibile" al passaggio del mouse */
+    width: 70px; 
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .alphabet-nav {
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 20px 15px;
     border-radius: 20px 0 0 20px;
-    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
-    
-    /* Gestione della scomparsa */
-    transform: translateX(100%); /* Nasconde il menu fuori dallo schermo */
+    box-shadow: -4px 0 15px rgba(0,0,0,0.05);
+    transform: translateX(100%); 
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Quando il mouse entra nell'area sensibile, il menu compare */
 .alphabet-area:hover .alphabet-nav {
     transform: translateX(0);
     opacity: 1;
@@ -333,12 +340,12 @@ body, html {
     color: #666;
     font-weight: 700;
     font-size: 0.9rem;
-    margin: 3px 0;
+    margin: 4px 0;
     text-align: center;
-    transition: color 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
 
 .alphabet-nav a:hover {
     color: #ff7f50;
-    transform: scale(1.3);
+    transform: scale(1.4);
 }
