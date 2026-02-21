@@ -53,7 +53,7 @@
             z-index: 1;
         }
 
-        /* Contenuto Header con animazione */
+        /* Contenuto Header con animazione e interattività */
         .header {
             position: absolute;
             top: 20px;
@@ -70,16 +70,29 @@
             align-items: center;
             z-index: 2;
             animation: fadeInDown 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            
+            /* Aggiunta transizione per animazione hover */
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Effetto hover sull'header: si allarga e si alza */
+        .header:hover {
+            transform: translate(-50%, -5px) scale(1.03); /* Sposta leggermente in alto e scala */
+            background: rgba(255, 255, 255, 0.2); /* Aumenta leggermente l'opacità dello sfondo */
         }
 
         /* STILI PER L'IMMAGINE DEL LOGO NELL'HEADER */
-        .logo {
+        .logo-container {
             display: flex;
             align-items: center;
+            background-color: white; /* Sfondo bianco per il logo */
+            padding: 5px; /* Spaziatura interna */
+            border-radius: 12px; /* Angoli arrotondati */
+            text-decoration: none; /* Rimuove la sottolineatura dal link */
         }
 
         .logo-img {
-            height: 35px; /* Modifica questo valore per ingrandire o rimpicciolire il logo in alto a sinistra */
+            height: 35px;
             width: auto;
             display: block;
         }
@@ -161,10 +174,9 @@
 
         .hero-title-img {
             max-width: 100%;
-            width: 500px; /* Modifica questo valore per ingrandire o rimpicciolire la scritta centrale */
+            width: 500px;
             height: auto;
-            /* Mantiene l'effetto ombra anche sull'immagine PNG per staccarla dallo sfondo */
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); 
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
             display: block;
         }
 
@@ -179,8 +191,8 @@
 <body>
 
     <header class="header">
-        <a href="#" class="logo">
-            <img src="images/title.png" alt="Ricettame Logo" class="logo-img">
+        <a href="#" class="logo-container">
+            <img src="images/logo.png" alt="Ricettame Logo" class="logo-img">
         </a>
         <nav class="nav">
             <ul>
