@@ -2,11 +2,12 @@
   {
     "id": "spaghetti-carbonara",
     "titolo": "Spaghetti alla Carbonara",
+    "lettera": "S",
     "categoria": "Primi Piatti",
     "tempo": "20 min",
     "difficolta": "Facile",
     "porzioni": 4,
-    "immagine": "images/carbonara.jpg",
+    "immagine": "../IMAGES/carbonara.jpg",
     "descrizione": "Il classico piatto romano, cremoso e saporito, rigorosamente senza panna!",
     "ingredienti": [
       "320g di Spaghetti",
@@ -26,11 +27,12 @@
   {
     "id": "tiramisu",
     "titolo": "Tiramisù Classico",
+    "lettera": "T",
     "categoria": "Dolci",
     "tempo": "30 min",
     "difficolta": "Media",
     "porzioni": 6,
-    "immagine": "images/tiramisu.jpg",
+    "immagine": "../IMAGES/tiramisu.jpg",
     "descrizione": "Il dolce al cucchiaio italiano per eccellenza, con savoiardi e crema al mascarpone.",
     "ingredienti": [
       "500g di Mascarpone",
